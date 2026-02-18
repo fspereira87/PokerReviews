@@ -23,7 +23,7 @@ class SEOCrewAgents:
             goal=(
                 "Collect verified, structured information about a poker operator "
                 "including bonuses, rakeback, traffic, software, banking methods, "
-                "licensing, and reputation."
+                "licensing, buy-ins values, different cash games values, and reputation."
             ),
             backstory=(
                 "A data-driven iGaming market analyst specializing in poker rooms, "
@@ -55,7 +55,8 @@ class SEOCrewAgents:
             role="Poker Review Content Architect",
             goal=(
                 "Design a structured outline for a poker operator review that "
-                "matches WorldPokerDeals-style formatting and affiliate positioning."
+                "matches WorldPokerDeals-style formatting and affiliate positioning,"
+                "and adapt the structure based on the operator's unique selling points and SERP insights."
             ),
             backstory=(
                 "A senior affiliate editor experienced in structuring high-converting "
@@ -70,10 +71,11 @@ class SEOCrewAgents:
             role="Poker Review Writer",
             goal=(
                 "Write a comprehensive, persuasive, and factually grounded "
-                "poker operator review following the approved outline."
+                "poker operator review following the approved outline,"
+                "use the correct tone of voice, relaxed but professional, using normal industry vocabulary, and include all relevant information for players to make informed decisions."
             ),
             backstory=(
-                "A professional poker content writer with deep knowledge of "
+                "A professional poker content writer, ex-poker professional poker player, with deep knowledge of "
                 "online poker ecosystems, rake structures, and affiliate dynamics."
             ),
             tools=[self.search_tool],
