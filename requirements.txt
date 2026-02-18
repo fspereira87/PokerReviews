@@ -1,0 +1,18 @@
+# CrewAI core
+crewai==0.121.1
+
+# LangChain (modern)
+langchain>=0.3.1,<0.4.0
+langchain-core>=0.3.1,<0.4.0
+langchain-community>=0.3.1,<0.4.0
+langchain-openai>=0.3.0,<0.4.0
+
+# Tools
+ddgs
+requests
+beautifulsoup4
+
+# Utils
+python-dotenv==1.0.0
+python-decouple==3.8
+PyYAML==6.0.2
