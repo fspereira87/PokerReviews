@@ -13,12 +13,12 @@ class SEOCrewAgents:
 
         # LLM – consider using your newest model here if available
         self.llm_precise = ChatOpenAI(
-            model="gpt-4o-mini",      # or latest 4.x flagship in the docs
+            model="gpt-4.1",      # or latest 4.x flagship in the docs
             temperature=0.3
         )
 
         self.llm_creative = ChatOpenAI(
-            model="gpt-40-mini",      # same model
+            model="gpt-4.1",      # same model
             temperature=0.7
         )
 
