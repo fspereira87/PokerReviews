@@ -13,7 +13,7 @@ class SEOCrewAgents:
 
         # LLM – consider using your newest model here if available
         self.llm_precise = ChatOpenAI(
-            model="openai/gpt-5-nano",      # or latest 4.x flagship in the docs
+            model="gpt-5-nano",      # or latest 4.x flagship in the docs
             temperature=0.3
         )
 
@@ -47,7 +47,7 @@ class SEOCrewAgents:
             ),
             tools=[self.search_tool, self.scrape_tool],
             verbose=True,
-            llm=self.llm
+            llm=self.llm_precise
         )
 
     def serp_intelligence_agent(self):
