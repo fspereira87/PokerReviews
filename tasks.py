@@ -21,9 +21,10 @@ class SEOCrewTasks:
                 "Output structured factual data only, not prose."
             ),
             expected_output=(
-                "Structured JSON-style data including bonuses, rakeback, "
-                "games, banking, licensing, and trust indicators. "
-                "Include confidence level for each major data point."
+                "Structured JSON-style data including bonuses, rakeback, games, banking, licensing, and trust "
+                "indicators. For each key field, include: `value`, `source_url`, and `confidence` "
+                "(high/medium/low). If offers differ by region or source, record them as `variants` instead "
+                "of picking one."
             ),
             config={}
         )
@@ -40,13 +41,15 @@ class SEOCrewTasks:
                 "- Primary and secondary keywords\n"
                 "- Common structural patterns\n"
                 "- Competitor content gaps\n"
-                "- Ranking angles used by competitors\n\n"
+                "- Ranking angles used by competitors\n"
+                "- How clearly competitors explain who the room is best for (stakes, player types)\n"
+                "- How they describe rakeback and bonus clearing (vague vs concrete)\n"
+                "- Obvious marketing hype or over-promising to avoid\n\n"
                 "Do not rewrite competitor content. Extract insights only."
             ),
             expected_output=(
-                "Keyword strategy including primary keyword, "
-                "secondary keywords, structural expectations, "
-                "and identified content opportunities."
+                "Keyword strategy including primary keyword, secondary keywords, structural expectations, "
+                "and identified content opportunities, including gaps in honesty, specificity, and target player profile."
             ),
             config={}
         )
@@ -57,8 +60,7 @@ class SEOCrewTasks:
             agent=agent,
             depends_on=[research_task, serp_task],
             description=(
-                f"Create a structured outline for a full poker operator review "
-                f"for '{operator_input}'.\n\n"
+                f"Create a structured outline for a full poker operator review for '{operator_input}'.\n\n"
                 "The structure must follow WorldPokerDeals-style format including:\n"
                 "- H1 Title\n"
                 "- Summary Box\n"
@@ -69,14 +71,16 @@ class SEOCrewTasks:
                 "- Software\n"
                 "- Banking\n"
                 "- Security & Licensing\n"
+                "- Who This Room Is Best For / Who It’s Not For\n"
                 "- Pros & Cons\n"
                 "- Final Verdict\n"
                 "- FAQ\n\n"
-                "Do not write full content yet."
+                "Make sure the outline supports a candid, poker-native tone for regs and serious recs, "
+                "and makes it easy to explain practical pros/cons."
             ),
             expected_output=(
-                "Detailed content outline including section hierarchy "
-                "and required data blocks."
+                "Detailed content outline including section hierarchy and required data blocks, "
+                "with bullets for key points under each section."
             ),
             config={}
         )
@@ -87,16 +91,20 @@ class SEOCrewTasks:
             agent=agent,
             depends_on=[research_task, outline_task],
             description=(
-                f"Write a complete poker operator review for '{operator_input}' "
-                "following the approved outline.\n\n"
-                "Use only verified data from the research phase. "
-                "Avoid unverified claims. "
-                "Flag any uncertain information.\n\n"
-                "Maintain a neutral-professional affiliate tone."
+                f"Write a complete poker operator review for '{operator_input}' following the approved outline.\n\n"
+                "Use only verified data from the research phase. Do not invent specific numerical offers or "
+                "guarantees. If data varies by region or source, explain that clearly.\n\n"
+                "Tone: professional but conversational, as if a knowledgeable poker player is explaining the room "
+                "to another player. Use standard industry vocabulary (e.g., regs, recs, micro-stakes, mid-stakes, "
+                "liquidity, traffic, rakeback, PKO) and avoid generic hype phrases such as 'premier platform', "
+                "'top choice', or 'unmatched experience'.\n\n"
+                "Include practical details that help players decide if this room fits their profile: stakes, "
+                "traffic peaks, rakeback realism vs advertised maximums, and software strengths/weaknesses.\n\n"
+                "Maintain a neutral-professional affiliate tone with honest pros and cons."
             ),
             expected_output=(
-                "Full long-form poker operator review in Markdown format "
-                "with structured headings and clearly separated sections."
+                "Full long-form poker operator review in Markdown format with structured headings and clearly "
+                "separated sections, written for intermediate to advanced online poker players."
             ),
             config={}
         )
@@ -114,12 +122,14 @@ class SEOCrewTasks:
                 "- Meta title and description are generated\n"
                 "- FAQ section targets featured snippet potential\n"
                 "- Internal linking suggestions are included\n\n"
+                "Do NOT remove or soften critical points about weaknesses (e.g., lower traffic than biggest rooms, "
+                "average rakeback compared to competitors, limited high-stakes action). Optimize headings, internal "
+                "anchors, and keyword placement, but keep the poker-player voice intact.\n\n"
                 "Preserve readability and natural tone."
             ),
             expected_output=(
-                "SEO-optimized review content including meta title, "
-                "meta description, FAQ schema suggestions, and "
-                "internal linking recommendations."
+                "SEO-optimized review content including meta title, meta description, FAQ schema suggestions, "
+                "and internal linking recommendations, with the original poker-native tone preserved."
             ),
             config={}
         )
@@ -137,11 +147,12 @@ class SEOCrewTasks:
                 "- Jurisdictional inaccuracies\n"
                 "- Missing responsible gambling disclaimers\n"
                 "- Bonus clarity issues\n\n"
-                "Add necessary disclaimers where required."
+                "Add necessary disclaimers where required. Preserve honest discussion of drawbacks (e.g., traffic, "
+                "rakeback, software issues). Do not remove balanced criticism unless it creates legal risk."
             ),
             expected_output=(
-                "Compliance-reviewed version of the article with "
-                "risk flags identified and corrections applied."
+                "Compliance-reviewed version of the article with risk flags identified and corrections applied, "
+                "with honest pros and cons still intact."
             ),
             config={}
         )
@@ -152,19 +163,25 @@ class SEOCrewTasks:
             agent=agent,
             depends_on=[compliance_task],
             description=(
-                f"Prepare the final publication-ready version of the "
-                f"'{operator_input}' poker review.\n\n"
+                f"Prepare the final publication-ready version of the '{operator_input}' poker review.\n\n"
                 "Deliver:\n"
                 "- Final formatted Markdown/HTML\n"
                 "- Executive summary for human editor\n"
                 "- Confidence score\n"
                 "- Fact-check checklist\n"
                 "- Sections requiring manual verification\n\n"
+                "Before finalizing, check:\n"
+                "- Does the review clearly state who the room is ideal for and who might be better off elsewhere?\n"
+                "- Are bonus and rakeback descriptions honest about variability and conditions?\n"
+                "- Is the tone consistent with a knowledgeable poker player speaking to another player?\n"
+                "- Are any phrases too generic or promotional for a reg audience? If so, rewrite them.\n\n"
                 "This is the final output before human approval."
             ),
             expected_output=(
-                "Publication-ready review article with editorial summary "
-                "and review checklist."
+                "Publication-ready review article with editorial summary and review checklist, preserving a "
+                "poker-native, honest tone."
             ),
             config={}
         )
+
+
