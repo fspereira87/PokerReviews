@@ -9,6 +9,7 @@ class SEOCrewTasks:
             agent=agent,
             description=(
                 f"Research the poker operator '{operator_input}'. "
+                "Current year is {self.current_year}"
                 "Collect verified, structured information including:\n"
                 "- Welcome bonus details\n"
                 "- Rakeback structure\n"
