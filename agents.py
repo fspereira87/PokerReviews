@@ -12,10 +12,16 @@ class SEOCrewAgents:
         self.scrape_tool = ScrapeWebsiteTool()
 
         # LLM – consider using your newest model here if available
-        self.llm = ChatOpenAI(
-            model="gpt-4o",
+        self.llm_precise = ChatOpenAI(
+            model="gpt-5-nano-2025-08-07",      # or latest 4.x flagship in the docs
+            temperature=0.3
+        )
+
+        self.llm_creative = ChatOpenAI(
+            model="gpt-5-nano-2025-08-07",      # same model
             temperature=0.7
         )
+
 
         # Shared audience & tone note (for clarity)
         self.audience_tone = (
@@ -58,7 +64,7 @@ class SEOCrewAgents:
             ),
             tools=[self.search_tool],
             verbose=True,
-            llm=self.llm
+            llm=self.llm_precise
         )
 
     def review_architect(self):
@@ -75,7 +81,7 @@ class SEOCrewAgents:
                 "for regs and serious recreational players."
             ),
             verbose=True,
-            llm=self.llm
+            llm=self.llm_precise
         )
 
     def review_writer(self):
@@ -93,7 +99,7 @@ class SEOCrewAgents:
             ),
             tools=[self.search_tool],
             verbose=True,
-            llm=self.llm
+            llm=self.llm_creative
         )
 
     def seo_optimizer(self):
@@ -108,7 +114,7 @@ class SEOCrewAgents:
                 "who respects the writer's voice and avoids turning copy into generic marketing."
             ),
             verbose=True,
-            llm=self.llm
+            llm=self.llm_precise
         )
 
     def compliance_agent(self):
@@ -123,7 +129,7 @@ class SEOCrewAgents:
                 "and affiliate risk management. You preserve balanced criticism unless it creates legal risk."
             ),
             verbose=True,
-            llm=self.llm
+            llm=self.llm_precise
         )
 
     def editorial_supervisor(self):
@@ -138,5 +144,5 @@ class SEOCrewAgents:
                 "and strategic positioning before publication. You prefer clear, practical language over vague marketing."
             ),
             verbose=True,
-            llm=self.llm
+            llm=self.llm_creative
         )
