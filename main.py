@@ -9,6 +9,7 @@ class PokerReviewCrew:
         operator_input: Operator name or URL
         """
         self.operator_input = operator_input
+        self.current_year = datetime.now().year
         self.agents = SEOCrewAgents()
         self.tasks = SEOCrewTasks()
         self.log_callback = log_callback or (lambda x: None)
